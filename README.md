@@ -37,4 +37,4 @@ writer.write("output.plf")
 
 ## Format spec
 
-See [PLF Format Specification](https://github.com/tu-org/plf-spec).
+See [PLF Format Specification](https://github.com/akolormedia/plf-spec).
