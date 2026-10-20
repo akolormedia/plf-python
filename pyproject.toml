@@ -19,6 +19,9 @@ vector = [
 modelb = [
     "groq>=0.4",
 ]
+otio = [
+    "opentimelineio>=0.17",
+]
 dev = [
     "pytest>=8.0",
 ]
