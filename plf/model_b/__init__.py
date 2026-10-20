@@ -5,3 +5,10 @@ from .modes import (
 )
 from .context import build_context
 from .system_prompt import get_system_prompt, set_system_prompt
+from .providers import (
+    DEFAULT_PROVIDER,
+    PROVIDERS,
+    ProviderSpec,
+    get_provider,
+    list_providers,
+)

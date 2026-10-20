@@ -102,6 +102,7 @@ def test_build_context_falls_back_without_table():
 
 
 def test_client_requires_api_key(monkeypatch):
+    monkeypatch.setenv("PLF_ENV_FILE", "/nonexistent/.env")
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
     client = ModelBClient(api_key="")
     try:
