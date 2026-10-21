@@ -1,9 +1,17 @@
-"""PLF <-> FilmCraft bridge (Phase 2).
+"""PLF <-> FilmCraft bridge (Phases 2 / FC-A).
 
 Drives FilmCraft's headless engine to rebuild a PLF edit as a real, openable
-``.fcproj``. See :mod:`.client` for the command channel, :mod:`.convert` for the
-PLF -> command mapping, and :func:`.bridge.load_plf_into_filmcraft` for the
-one-call entry point.
+``.fcproj``. Two load paths plus the sync-back side:
+
+- :mod:`.client` — the JSONL command channel,
+- :mod:`.convert` — PLF -> ``timeline.*`` commands (F2, command rebuild),
+- :func:`.bridge.load_plf_into_filmcraft` — the one-call command entry point,
+- :mod:`.native` — FC-A native load: enriched OTIO -> single ``file.import``,
+- :mod:`.reverse` — FC-A reverse sync: ``sequence.inspect`` -> PLF,
+- :mod:`.dirty` — §3.4 dirty flags between original and synced timeline,
+- :mod:`.generate` — run the generation pipeline over a project's clips.
+
+CLI: ``python -m plf.bridge --help``.
 """
 from .client import (
     FilmCraftClient,
@@ -22,6 +30,10 @@ from .convert import (
     build_edit_commands,
 )
 from .bridge import load_plf_into_filmcraft, BridgeReport
+from .native import load_plf_native, NativeReport
+from .reverse import inspect_to_plf, sync_project
+from .dirty import diff_plf, DiffReport, DirtySegment
+from .generate import generate_plfs
 
 __all__ = [
     "FilmCraftClient",
@@ -38,4 +50,12 @@ __all__ = [
     "build_edit_commands",
     "load_plf_into_filmcraft",
     "BridgeReport",
+    "load_plf_native",
+    "NativeReport",
+    "inspect_to_plf",
+    "sync_project",
+    "diff_plf",
+    "DiffReport",
+    "DirtySegment",
+    "generate_plfs",
 ]
